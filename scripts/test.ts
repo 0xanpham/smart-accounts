@@ -10,7 +10,6 @@ async function main() {
   // console.log(count);
   // const entryPoint = await hre.ethers.getContractAt("EntryPoint", EP_ADDR);
   // console.log(await entryPoint.getDeployedCode())
-
   console.log("account balance", await hre.ethers.provider.getBalance(ACCOUNT_ADDR));
   console.log("paymaster balance", await hre.ethers.provider.getBalance(PM_ADDRESS));
   console.log("entrypoint balance", await hre.ethers.provider.getBalance(EP_ADDRESS));
