@@ -49,14 +49,17 @@ async function main() {
     nonce: await entryPoint.getNonce(sender, 0), // nonce which entry point contract manage
     initCode,
     callData: Account.interface.encodeFunctionData("execute"), // encoded function to call inside smart account contract
-    callGasLimit: 200_000,
-    verificationGasLimit: 200_000,
-    preVerificationGas: 50_000,
+    callGasLimit: 400_000,
+    verificationGasLimit: 400_000,
+    preVerificationGas: 100_000,
     maxFeePerGas: hre.ethers.parseUnits("10", "gwei"),
     maxPriorityFeePerGas: hre.ethers.parseUnits("5", "gwei"),
     paymasterAndData: PM_ADDRESS,
-    signature: "0x"
+    signature: "0x",
   }
+
+  const userOpHash = await entryPoint.getUserOpHash(userOp);
+  userOp.signature = await signer0.signMessage(hre.ethers.getBytes(userOpHash));
 
   console.log({ userOp })
 
